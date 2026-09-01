@@ -1,0 +1,15 @@
+{
+  "name": "iONTEK Project GridShield Safe Zone PH",
+  "short_name": "Safe Zone PH",
+  "description": "Locate yourself, find the nearest safe zone, and get the road to take.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0e11",
+  "theme_color": "#0b0e11",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

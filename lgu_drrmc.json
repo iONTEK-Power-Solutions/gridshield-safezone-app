@@ -1,0 +1,27 @@
+{
+  "directory_version": "1.0-SEED",
+  "status": "SEED DIRECTORY. Entries marked verified were confirmed from official LGU/agency publications; others are marked verify. LGUs may submit or correct entries via the in-app Contribute form (miles@iontek.com.ph).",
+  "maintainer": "iONTEK Power Solutions Corporation - GridShield Division",
+  "national": [
+    {"agency": "Emergency (all)", "tel": "911", "verified": true},
+    {"agency": "NDRRMC Operations Center", "tel": "+63 2 8911 5061", "note": "trunkline - verify current", "verified": false, "web": "https://ndrrmc.gov.ph"},
+    {"agency": "PAGASA (weather/rainfall warnings)", "tel": "+63 2 8927 1335", "verified": true, "web": "https://www.pagasa.dost.gov.ph"},
+    {"agency": "UP NOAH (hazard maps)", "web": "https://noah.up.edu.ph", "verified": true}
+  ],
+  "lgus": [
+    {"lgu": "Alaminos City", "province": "Pangasinan", "region": "Luzon", "office": "City DRRMO", "tel": "+63 947 551 1420", "email": "cdrrmoffice.alaminos@gmail.com", "address": "Quezon Ave, Poblacion", "lat": 16.1558, "lng": 119.9797, "verified": true},
+    {"lgu": "Pangasinan (Provincial)", "province": "Pangasinan", "region": "Luzon", "office": "PDRRMO", "web": "https://www.pangasinan.gov.ph", "address": "Provincial Capitol, Lingayen", "lat": 16.0210, "lng": 120.2310, "verified": true},
+    {"lgu": "Bolinao", "province": "Pangasinan", "region": "Luzon", "office": "Municipal DRRMO", "address": "Municipal Hall, Bolinao", "lat": 16.3883, "lng": 119.8927, "verified": false},
+    {"lgu": "Binmaley", "province": "Pangasinan", "region": "Luzon", "office": "Municipal DRRMO", "address": "Municipal Hall, Binmaley", "lat": 16.0320, "lng": 120.2690, "verified": false},
+    {"lgu": "Dagupan City", "province": "Pangasinan", "region": "Luzon", "office": "City DRRMO", "address": "City Hall, Dagupan", "lat": 16.0433, "lng": 120.3333, "verified": false},
+    {"lgu": "Gapan City", "province": "Nueva Ecija", "region": "Luzon", "office": "City DRRMO", "address": "City Hall, Gapan", "lat": 15.3077, "lng": 120.9450, "verified": false},
+    {"lgu": "Marikina City", "province": "Metro Manila", "region": "Luzon", "office": "City DRRMO / Marikina Rescue", "tel": "161", "note": "Marikina Rescue hotline - verify current", "address": "City Hall, Marikina", "lat": 14.6331, "lng": 121.0961, "verified": false},
+    {"lgu": "Quezon City", "province": "Metro Manila", "region": "Luzon", "office": "QC DRRMO", "tel": "122", "note": "QC hotline - verify current", "lat": 14.6488, "lng": 121.0509, "verified": false},
+    {"lgu": "Cebu City", "province": "Cebu", "region": "Visayas", "office": "City DRRMO", "lat": 10.2930, "lng": 123.9010, "verified": false},
+    {"lgu": "Iloilo City", "province": "Iloilo", "region": "Visayas", "office": "City DRRMO", "lat": 10.6960, "lng": 122.5640, "verified": false},
+    {"lgu": "Tacloban City", "province": "Leyte", "region": "Visayas", "office": "City DRRMO", "lat": 11.2440, "lng": 125.0040, "verified": false},
+    {"lgu": "Davao City", "province": "Davao del Sur", "region": "Mindanao", "office": "City DRRMO / Central 911", "tel": "911", "lat": 7.0640, "lng": 125.6080, "verified": true},
+    {"lgu": "Cagayan de Oro City", "province": "Misamis Oriental", "region": "Mindanao", "office": "City DRRMO", "lat": 8.4770, "lng": 124.6450, "verified": false},
+    {"lgu": "Zamboanga City", "province": "Zamboanga del Sur", "region": "Mindanao", "office": "City DRRMO", "lat": 6.9210, "lng": 122.0790, "verified": false}
+  ]
+}

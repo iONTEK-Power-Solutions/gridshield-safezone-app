@@ -1,0 +1,84 @@
+iONTEK PROJECT GRIDSHIELD(TM) SAFE ZONE — PROPRIETARY LICENSE
+=====================================================================
+Copyright (c) 2026 Milagrosa Russelle P. Ballestar and
+iONTEK Power Solutions Corporation — GridShield(TM) Division
+4 Purple St., Concepcion Dos, Marikina City 1811, Philippines
+SEC Registration No. CS202001609
+ALL RIGHTS RESERVED.
+
+THIS IS NOT AN OPEN-SOURCE LICENSE.
+
+1. OWNERSHIP
+   The software in this repository — including all source code (HTML,
+   CSS, JavaScript), algorithms, data structures, registry schemas,
+   system architecture integration framework, user interface design,
+   icons, and documentation (collectively, the "Software") — is the
+   exclusive property of the copyright holders named above and is
+   protected under Republic Act No. 8293 (Intellectual Property Code of
+   the Philippines), as amended, and applicable international treaties
+   (Berne Convention; WIPO Copyright Treaty).
+
+2. LIMITED PUBLIC-SAFETY USE GRANT
+   The copyright holders grant members of the public a personal,
+   non-exclusive, non-transferable, revocable, royalty-free right to
+   ACCESS and USE the deployed Software, in unmodified form, at the
+   official URL(s) published by the copyright holders, solely for
+   personal disaster-preparedness and evacuation-guidance purposes.
+
+3. PROHIBITED ACTS
+   Except as expressly permitted in Section 2 or by prior written
+   consent of the copyright holders, you may NOT:
+   (a) copy, reproduce, download for redistribution, mirror, or
+       re-host the Software or any part of it;
+   (b) modify, translate, adapt, rebrand, rename, or create derivative
+       works of the Software, its algorithms, or its architecture;
+   (c) reverse engineer, decompile, deobfuscate, or otherwise attempt
+       to derive the underlying design, methods, or trade secrets;
+   (d) remove, alter, or obscure any copyright, trademark, build
+       identifier, or ownership notice;
+   (e) use the Software, in whole or in part, to build a competing or
+       substantially similar product or service;
+   (f) use the names "iONTEK", "GridShield", "Safe Zone PH", or
+       associated logos in any manner suggesting endorsement or origin.
+
+4. TRADEMARKS
+   "iONTEK(TM)", "GridShield(TM)", and "Zero-to-Hero(TM)" are marks of
+   iONTEK Power Solutions Corporation (PH TM Application No.
+   4202500528353 and related filings). No trademark license is granted.
+
+5. THIRD-PARTY COMPONENTS
+   This license does not apply to third-party components, which retain
+   their own licenses: Leaflet (BSD-2-Clause), OpenStreetMap data
+   (ODbL), QRCode.js (MIT). Hazard science references UP NOAH
+   (UP Resilience Institute) and is not claimed hereunder.
+
+6. NO WARRANTY; LIMITATION OF LIABILITY
+   THE SOFTWARE IS PROVIDED "AS IS" FOR INDICATIVE GUIDANCE ONLY.
+   USERS MUST CONFIRM DESIGNATED EVACUATION CENTERS WITH THEIR LOCAL
+   DISASTER RISK REDUCTION AND MANAGEMENT OFFICE AND OBEY OFFICIAL
+   INSTRUCTIONS. TO THE FULLEST EXTENT PERMITTED BY LAW, THE COPYRIGHT
+   HOLDERS DISCLAIM ALL WARRANTIES AND SHALL NOT BE LIABLE FOR ANY
+   DAMAGES ARISING FROM USE OF OR RELIANCE ON THE SOFTWARE.
+
+7. DATA PRIVACY
+   Device location is processed on-device only for the sole function
+   of computing nearest safe zones. No personal data is collected,
+   stored, or transmitted by the copyright holders (RA 10173, Data
+   Privacy Act of 2012).
+
+8. TERMINATION
+   Any breach of this license automatically terminates the grant in
+   Section 2. The copyright holders reserve all remedies at law and in
+   equity, including under RA 8293 Part IV (Enforcement).
+
+9. GOVERNING LAW
+   This license is governed by the laws of the Republic of the
+   Philippines. Venue: courts of Marikina City, to the exclusion of
+   all others.
+
+10. CONTACT / PERMISSIONS
+    Licensing, partnership, and LGU deployment requests:
+    miles@iontek.com.ph | www.iontek.com.ph | +63 (2) 8997-7108
+
+Build reference: v2.1.0 (SZ-20260831-PH)
+Custos Proprietatis Intellectualis · Omnia Iura Reservantur · Lex Protegit Inventorem
