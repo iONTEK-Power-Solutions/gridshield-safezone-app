@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- (c) 2026 Milagrosa Russelle P. Ballestar / iONTEK Power Solutions Corporation - GridShield(TM) Division. All Rights Reserved. RA 8293. SEC CS202001609. Build HUB-20260902-PH-2. Proprietary - see LICENSE. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safe Zone PH · iONTEK Project GridShield™ — nearest safe zone, road to take</title>
+<meta name="description" content="People-centered early warning at the last mile: nearest safe zone + road to take, for every Filipino. Free, offline-first. Copernicus · UP NOAH · PAGASA · DRRMC in one screen.">
+<meta name="theme-color" content="#07090c">
+<meta property="og:title" content="Safe Zone PH — iONTEK Project GridShield™">
+<meta property="og:description" content="Alerts tell. Maps show. Safe Zone teaches. Free disaster-evacuation app for Luzon, Visayas, Mindanao.">
+<meta property="og:image" content="https://safezone.projectgridshield.com/icon-512.png">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--safe:#2ee06f;--amber:#ffb020;--teal:#17a29f;--blue:#1ea0ff;--orange:#ff7828;
+  --ink:#07090c;--panel:#10151b;--line:#1e252d;--txt:#dbe4ec;--mut:#7e8ea0;
+  --mono:'SF Mono','Cascadia Code','Courier New',ui-monospace,monospace;
+  --sans:-apple-system,'Segoe UI',Inter,Roboto,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:var(--ink);color:var(--txt);font-family:var(--sans);
+  display:flex;align-items:center;justify-content:center;padding:34px 18px;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:90px 90px;opacity:.28}
+.orbits{position:fixed;inset:0;pointer-events:none;opacity:.5;width:100%;height:100%}
+.wrap{width:100%;max-width:460px;text-align:center;position:relative;z-index:2}
+.shield{width:104px;height:104px;margin:0 auto;display:block;filter:drop-shadow(0 8px 34px rgba(46,224,111,.22))}
+.brand{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--teal);font-weight:700;text-transform:uppercase;margin-top:16px}
+h1{font-size:30px;letter-spacing:.14em;color:#fff;font-weight:300;text-transform:uppercase;margin:6px 0 3px}
+.sub{font-family:var(--mono);font-size:10px;color:var(--mut);letter-spacing:.22em;text-transform:uppercase}
+.tag{font-size:14.5px;color:var(--txt);margin:16px auto 24px;max-width:340px;line-height:1.65;font-weight:300}
+.tag em{color:var(--safe);font-style:normal}
+a.b{display:flex;align-items:center;gap:14px;text-align:left;text-decoration:none;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:6px;padding:15px 16px;margin:10px 0;color:var(--txt);
+  transition:transform .12s ease,border-color .2s}
+a.b:hover{border-color:var(--teal);transform:translateY(-1px)}
+a.b:active{transform:scale(.985)}
+a.b .e{width:38px;height:38px;flex:0 0 38px}
+a.b b{display:block;color:#fff;font-size:14.5px;letter-spacing:.05em;font-weight:600}
+a.b span.d{display:block;font-size:11.5px;color:var(--mut);margin-top:2px;line-height:1.45}
+a.b.primary{background:linear-gradient(135deg,#2ee06f,#20c05c);border-color:transparent}
+a.b.primary b{color:#04130a}a.b.primary span.d{color:#0a3a1e}
+a.b.red{border-left-color:#ff3b30}
+a.b.amber{border-left-color:var(--amber)}
+.soon{opacity:.5;pointer-events:none}
+.soon b::after{content:"  \00b7  COMING SOON";font-family:var(--mono);font-size:8.5px;color:var(--amber);letter-spacing:.16em;vertical-align:middle}
+.rule{height:1px;background:var(--line);margin:26px 30px 0}
+.prov{font-family:var(--mono);margin-top:18px}
+.prov .p1{font-size:10px;letter-spacing:.18em;color:var(--teal);font-weight:700;text-transform:uppercase}
+.prov .p2{font-size:11px;color:var(--mut);margin-top:7px;line-height:1.8}
+#qrbox{display:none;background:#faf7f0;border-radius:8px;padding:13px;width:198px;margin:20px auto 0}
+.qrcap{display:none;font-family:var(--mono);font-size:9.5px;color:var(--mut);letter-spacing:.16em;text-transform:uppercase;margin-top:9px}
+.foot{font-family:var(--mono);margin-top:22px;font-size:9px;color:#5c6a7a;line-height:1.7}
+.foot a{color:var(--teal);text-decoration:none}
+@media (prefers-reduced-motion:no-preference){
+  .pulse{animation:pu 2.4s ease-in-out infinite}
+  @keyframes pu{50%{filter:drop-shadow(0 8px 48px rgba(46,224,111,.4))}}
+}
+</style>
+</head>
+<body>
+<svg class="orbits" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g fill="none" stroke-width="1.5" opacity=".5">
+    <path d="M -80 640 Q 600 380 1280 560" stroke="#1ea0ff"/>
+    <path d="M -80 720 Q 600 460 1280 640" stroke="#2ee06f"/>
+    <path d="M -80 800 Q 600 540 1280 720" stroke="#ff7828"/>
+  </g>
+</svg>
+
+<div class="wrap">
+  <svg class="shield pulse" viewBox="0 0 120 120" role="img" aria-label="GridShield Safe Zone">
+    <rect x="2" y="2" width="116" height="116" rx="26" fill="#0d1115" stroke="#1e252d"/>
+    <polygon points="60,18 92,36 92,66 60,102 28,66 28,36" fill="none" stroke="#17a29f" stroke-width="4" stroke-linejoin="round"/>
+    <line x1="44" y1="80" x2="76" y2="42" stroke="#2ee06f" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="44" cy="80" r="8" fill="#ff3b30" stroke="#fff" stroke-width="2.5"/>
+    <circle cx="76" cy="42" r="8" fill="#2ee06f" stroke="#fff" stroke-width="2.5"/>
+  </svg>
+
+  <div class="brand">iONTEK Project GridShield&trade;</div>
+  <h1>Safe Zone &middot; PH</h1>
+  <div class="sub">Luzon &middot; Visayas &middot; Mindanao</div>
+
+  <p class="tag">Alerts <em>tell</em>. Maps <em>show</em>. Safe Zone <em>teaches</em> &mdash;
+  the nearest safe zone and the road to take, for every Filipino. Free. Offline-first.</p>
+
+  <a class="b primary" href="install.html">
+    <svg class="e" viewBox="0 0 38 38"><rect x="1" y="1" width="36" height="36" rx="9" fill="rgba(4,19,10,.18)"/><path d="M19 8v14m0 0l-6-6m6 6l6-6M11 28h16" stroke="#04130a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span><b>Install the app</b><span class="d">iOS &amp; Android &middot; free &middot; works offline</span></span>
+  </a>
+
+  <a class="b" href="index.html">
+    <svg class="e" viewBox="0 0 38 38"><rect x="1" y="1" width="36" height="36" rx="9" fill="#0d1115" stroke="#1e252d"/><circle cx="19" cy="16" r="6.5" fill="none" stroke="#2ee06f" stroke-width="2.5"/><path d="M19 22.5V31M12 31h14" stroke="#2ee06f" stroke-width="2.5" stroke-linecap="round"/><circle cx="19" cy="16" r="2.2" fill="#2ee06f"/></svg>
+    <span><b>Open Safe Zone now</b><span class="d">Locate Me &rarr; nearest safe zone &rarr; road to take</span></span>
+  </a>
+
+  <a class="b" href="corridor.html">
+    <svg class="e" viewBox="0 0 38 38"><rect x="1" y="1" width="36" height="36" rx="9" fill="#0d1115" stroke="#1e252d"/><path d="M19 30V13" stroke="#2ee06f" stroke-width="3" stroke-dasharray="4 3.2" stroke-linecap="round"/><path d="M13.5 13.5 L19 7l5.5 6.5z" fill="#2ee06f"/><circle cx="19" cy="30" r="3.4" fill="#ff3b30" stroke="#fff" stroke-width="1.6"/><circle cx="27.5" cy="20" r="2.6" fill="#ffb020"/></svg>
+    <span><b>Corridor Check</b><span class="d">Go / Caution / No-Go before a long drive &middot; Sentinel-2 &middot; vehicle-aware</span></span>
+  </a>
+
+  <a class="b red" href="tel:911">
+    <svg class="e" viewBox="0 0 38 38"><rect x="1" y="1" width="36" height="36" rx="9" fill="#0d1115" stroke="#1e252d"/><path d="M12 10c-1 6 6 15 13 16 1.4.2 3-1 3.4-2.6.3-1-.2-1.9-1.1-2.3l-3.3-1.4c-.8-.3-1.7 0-2.2.7l-.7 1c-2.4-1.3-4.6-3.6-5.6-6l1-.6c.8-.5 1.1-1.4.8-2.2l-1.3-3.4c-.4-.9-1.3-1.4-2.3-1.2C12.9 8.3 12.1 9 12 10z" fill="#ff3b30"/></svg>
+    <span><b>Emergency 911</b><span class="d">One tap &middot; nationwide</span></span>
+  </a>
+
+  <a class="b amber" href="https://noah.up.edu.ph/" target="_blank" rel="noopener">
+    <svg class="e" viewBox="0 0 38 38"><rect x="1" y="1" width="36" height="36" rx="9" fill="#0d1115" stroke="#1e252d"/><path d="M7 24c3-3 5-3 8 0s5 3 8 0 5-3 8 0M7 30c3-3 5-3 8 0s5 3 8 0 5-3 8 0" stroke="#1ea0ff" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M19 7l7 9H12z" fill="#ffb020"/></svg>
+    <span><b>UP NOAH hazard maps</b><span class="d">Flood &middot; landslide &middot; storm surge</span></span>
+  </a>
+
+  <a class="b soon" href="#" aria-disabled="true">
+    <svg class="e" viewBox="0 0 38 38"><rect x="1" y="1" width="36" height="36" rx="9" fill="#0d1115" stroke="#1e252d"/><path d="M13 9l14 10-14 10z" fill="#7e8ea0"/></svg>
+    <span><b>Get it on Google Play</b><span class="d">One-tap install for Android</span></span>
+  </a>
+
+  <div id="qrbox"></div><div class="qrcap" id="qrcap">Scan with your phone camera</div>
+
+  <div class="rule"></div>
+  <div class="prov">
+    <div class="p1">ESA Copernicus Ambassador &middot; Energy Sector, Philippines</div>
+    <div class="p2">Innovate with EU Space Data &middot; European Union Global Gateway &middot; Philippine Space Agency<br>
+    Hazard science: UP NOAH, UP Resilience Institute &middot; Earth observation: Copernicus Sentinel</div>
+  </div>
+
+  <div class="foot">
+    Free public-safety application. Location is processed on your device only (RA 10173) &middot; <a href="privacy.html">Privacy</a><br>
+    &copy; 2026 Milagrosa Russelle P. Ballestar &middot; iONTEK Power Solutions Corporation &mdash; GridShield&trade; Division<br>
+    Marikina City, Philippines &middot; SEC CS202001609 &middot; RA 8293 &middot; HUB-20260902-PH-2
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* (c) 2026 M.R.P. Ballestar / iONTEK Power Solutions Corp. */
+var ua = navigator.userAgent || '';
+if (!/iPhone|iPad|iPod|Android/i.test(ua)) {
+  var box = document.getElementById('qrbox'); box.style.display = 'block';
+  document.getElementById('qrcap').style.display = 'block';
+  var u = 'https://safezone.projectgridshield.com/';
+  if (typeof QRCode !== 'undefined') {
+    new QRCode(box, {text: u, width: 172, height: 172, colorDark: '#0b0e11', colorLight: '#faf7f0', correctLevel: QRCode.CorrectLevel.M});
+  } else {
+    var img = document.createElement('img');
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=172x172&data=' + encodeURIComponent(u);
+    img.width = 172; img.height = 172; box.appendChild(img);
+  }
+}
+</script>
+</body>
+</html>
