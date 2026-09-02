@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Corridor Check — iONTEK Project GridShield™ Safe Zone PH</title>
+<meta name="author" content="Milagrosa Russelle P. Ballestar — iONTEK Power Solutions Corporation">
+<meta name="theme-color" content="#0b0e11">
+<link rel="icon" href="icon-cc-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-cc-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Corridor Check">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* iONTEK Project GridShield™ Safe Zone — CORRIDOR CHECK (EO-integrated) v3.0.2-beta · Build CC-20260902-PH
+ * © 2026 Milagrosa Russelle P. Ballestar / iONTEK Power Solutions Corporation — GridShield™ Division
+ * All Rights Reserved · RA 8293 · SEC Reg. CS202001609 · Proprietary — see LICENSE */
+:root{--alert:#ff3b30;--safe:#2ee06f;--amber:#ffb020;--teal:#0e7c7b;--ink:#0b0e11;--panel:#12161b;
+  --line:#232a32;--txt:#d7e0e8;--mut:#8494a3;--mono:'Courier New',ui-monospace,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:var(--ink);color:var(--txt);font-family:var(--mono);overflow:hidden}
+#map{position:absolute;inset:0;z-index:1;background:#0b0e11}
+.leaflet-container{background:#0b0e11}
+.dark .leaflet-tile-pane .osm{filter:grayscale(1) invert(1) brightness(.85) contrast(1.15) hue-rotate(180deg) saturate(.35)}
+
+.hud-top{position:absolute;top:0;left:0;right:0;z-index:1000;padding:10px 14px 0 60px;pointer-events:none}
+.brand{font-size:9.5px;letter-spacing:.22em;color:var(--teal);font-weight:bold;text-transform:uppercase}
+h1{font-size:clamp(15px,4.2vw,20px);letter-spacing:.05em;text-transform:uppercase;color:#fff;margin-top:2px}
+.layers{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;pointer-events:auto}
+.chip{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border-radius:2px;cursor:pointer;
+  border:1px solid var(--line);background:rgba(18,22,27,.92);color:var(--mut);font-family:var(--mono)}
+.chip.on{color:#fff;border-color:var(--teal);background:rgba(14,124,123,.35)}
+.chip.ext::after{content:" \2197"}
+
+.hud-bottom{position:absolute;left:0;right:0;bottom:0;z-index:1000;
+  background:linear-gradient(0deg,rgba(11,14,17,.98) 70%,transparent);padding:26px 10px 10px;max-height:62vh;overflow-y:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.fld{background:var(--panel);border:1px solid var(--line);padding:6px 8px}
+.fld label{display:block;font-size:9px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase;margin-bottom:3px}
+.fld select{width:100%;background:transparent;color:#fff;border:none;font-family:var(--mono);font-size:12px;outline:none}
+.run{display:block;width:100%;background:var(--safe);color:#04130a;border:none;border-radius:3px;font-family:var(--mono);
+  font-weight:bold;font-size:14px;letter-spacing:.14em;text-transform:uppercase;padding:15px 8px;cursor:pointer;
+  box-shadow:0 0 26px rgba(46,224,111,.25)}
+.run:active{transform:scale(.985)}
+.verdict{display:none;margin-top:8px;border:1px solid var(--line);border-left:4px solid var(--mut);background:var(--panel);padding:10px 12px}
+.verdict.show{display:block}
+.verdict h2{font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.verdict.go{border-left-color:var(--safe)} .verdict.go h2{color:var(--safe)}
+.verdict.caution{border-left-color:var(--amber)} .verdict.caution h2{color:var(--amber)}
+.verdict.nogo{border-left-color:var(--alert)} .verdict.nogo h2{color:var(--alert)}
+.verdict ul{list-style:none;margin-top:6px}
+.verdict li{font-size:11px;line-height:1.55;padding-left:14px;position:relative;color:var(--txt)}
+.verdict li::before{content:"\\203A";position:absolute;left:0;color:var(--mut)}
+.verdict li.bad::before{content:"\\2716";color:var(--alert)} .verdict li.warn::before{content:"\\26A0";color:var(--amber)} .verdict li.ok::before{content:"\\2713";color:var(--safe)}
+.btns{display:flex;gap:6px;margin-top:8px}
+a.btn,button.btn{flex:1;text-align:center;text-decoration:none;font-weight:bold;font-size:11px;letter-spacing:.08em;padding:11px 6px;
+  border-radius:3px;text-transform:uppercase;font-family:var(--mono);cursor:pointer;border:1.5px solid var(--line);background:transparent;color:var(--txt)}
+.btn-nav{background:var(--safe);color:#04130a;border-color:var(--safe)}
+.btn-call{color:var(--alert);border-color:var(--alert);flex:0 0 70px}
+.foot{margin-top:8px;font-size:9px;color:var(--mut);line-height:1.55}
+.foot a{color:var(--teal)}
+.wp{width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid #fff;position:absolute;top:-6px;left:-6px}
+.wp.start{background:var(--alert)} .wp.end{background:var(--safe)} .wp.ev{background:var(--amber)}
+.leaflet-popup-content-wrapper{background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:4px;font-family:var(--mono)}
+.leaflet-popup-tip{background:var(--panel)} .leaflet-popup-content{font-size:11.5px;line-height:1.5} .leaflet-popup-content b{color:#fff}
+.leaflet-control-attribution{background:rgba(11,14,17,.75)!important;color:var(--mut)!important;font-size:8.5px!important}
+.leaflet-control-attribution a{color:var(--mut)!important}
+.leaflet-control-zoom{margin-top:118px!important}
+.leaflet-control-zoom a{background:var(--panel)!important;color:var(--txt)!important;border-color:var(--line)!important}
+</style>
+</head>
+<body class="dark">
+<div id="map"></div>
+
+<div class="hud-top">
+  <div class="brand">iONTEK Project GridShield&trade; &middot; Corridor Check</div>
+  <h1>EO-Integrated Safe Corridor</h1>
+  <div class="layers">
+    <button class="chip on" id="chipSat">&#128752; Sentinel-2</button>
+    <button class="chip on" id="chipHaz">&#9888; Hazard zones</button>
+    <button class="chip ext" id="chipGFM">Copernicus GFM</button>
+    <button class="chip ext" id="chipNOAH">UP NOAH</button>
+    <button class="chip ext" id="chipLGU">LGU / PDRRMO</button>
+  </div>
+</div>
+
+<div class="hud-bottom">
+  <div class="grid">
+    <div class="fld"><label>Corridor</label>
+      <select id="corr"><option value="binmaley">Binmaley &rarr; Marikina</option><option value="alaminos">Alaminos &rarr; Marikina</option></select></div>
+    <div class="fld"><label>Vehicle</label>
+      <select id="veh"><option value="ev">EV / sedan (15 cm limit)</option><option value="sedan">Sedan (15 cm)</option><option value="suv">SUV / AUV (30 cm)</option><option value="4x4">4x4 / truck (45 cm)</option></select></div>
+    <div class="fld"><label>PAGASA warning (origin)</label>
+      <select id="pag"><option value="0">None</option><option value="1">Yellow</option><option value="2" selected>Orange</option><option value="3">Red</option></select></div>
+    <div class="fld"><label>LGU river gauge</label>
+      <select id="riv"><option value="0">Below normal</option><option value="1" selected>Above normal, receding</option><option value="2">Above normal, rising</option></select></div>
+    <div class="fld"><label>Copernicus GFM flood extent on route</label>
+      <select id="gfm"><option value="0">None visible</option><option value="1" selected>Patches near origin</option><option value="2">Covers a road segment</option></select></div>
+    <div class="fld"><label>Departure</label>
+      <select id="day"><option value="0">Daylight</option><option value="1">Night</option></select></div>
+  </div>
+  <button class="run" id="run">&#9889; Run Corridor Check</button>
+
+  <div class="verdict" id="verdict"><h2 id="vTitle"></h2><ul id="vList"></ul>
+    <div class="btns">
+      <a class="btn btn-nav" id="nav" href="#" target="_blank" rel="noopener">&#9658; Navigate (Google Maps)</a>
+      <a class="btn btn-call" href="tel:911">&#9742; 911</a>
+    </div>
+  </div>
+  <div class="foot">Indicative decision support only. Basemap: Sentinel-2 cloudless mosaic &copy; <a href="https://s2maps.eu" target="_blank" rel="noopener">EOX IT Services</a> (Contains modified Copernicus Sentinel data) &middot; &copy; OpenStreetMap contributors. Live flood extent: Copernicus GFM. Hazard science: UP NOAH. Confirm with your DRRMO.<br>
+  &copy; 2026 Milagrosa Russelle P. Ballestar &middot; iONTEK Power Solutions Corporation &mdash; GridShield&trade; Division &middot; RA 8293 &middot; v3.0.2-beta (CC-20260902-PH)</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* © 2026 M.R.P. Ballestar / iONTEK Power Solutions Corp. — Corridor Check engine. Proprietary. */
+const CORRIDORS = {
+  binmaley: {
+    name: 'Binmaley → Marikina (northern line, bypasses Calasiao/Marusay)',
+    pts: [
+      {n:'Binmaley (start) — low plain', c:[16.032,120.269], k:'start', t:'Check GFM + NOAH before leaving. 80%+ charge.'},
+      {n:'Dagupan City', c:[16.0433,120.3333], t:'Head EAST via Mangaldan. If center is flooded, HOLD in Binmaley.'},
+      {n:'Mangaldan → Manaoag', c:[16.044,120.485], t:'Avoids Calasiao and the Marusay River hotspot.'},
+      {n:'Urdaneta — TPLEX entry', c:[15.976,120.571], t:'Elevated expressway from here. Risk drops sharply.'},
+      {n:'Tarlac — TPLEX→SCTEX', c:[15.487,120.590], t:'Stay on the spine; western Tarlac towns under Yellow.'},
+      {n:'Mabalacat / Clark — EV charge', c:[15.223,120.601], k:'ev', t:'Top-up window. Verify chargers on PlugShare.'},
+      {n:'Marikina City (destination)', c:[14.6331,121.0961], k:'end', t:'Check Marikina River level before riverside barangays.'}
+    ]
+  },
+  alaminos: {
+    name: 'Alaminos → Marikina (via Urdaneta TPLEX)',
+    pts: [
+      {n:'Alaminos City Hall / CDRRMO (start)', c:[16.1558,119.9797], k:'start', t:'Call CDRRMO +63 947 551 1420 for road status.'},
+      {n:'Urdaneta — TPLEX entry', c:[15.976,120.571], t:'Riskiest segment is before this point (Dagupan–Calasiao plain).'},
+      {n:'Tarlac — TPLEX→SCTEX', c:[15.487,120.590], t:'Do NOT take the Camiling–Mangatarem backroad (Yellow).'},
+      {n:'Mabalacat / Clark — EV charge', c:[15.223,120.601], k:'ev', t:'Top-up window.'},
+      {n:'Marikina City (destination)', c:[14.6331,121.0961], k:'end', t:'Approach Concepcion via Marcos Hwy side.'}
+    ]
+  }
+};
+const HAZARDS = [
+  {n:'Calasiao — Marusay River flood hotspot (PDRRMO)', c:[15.995,120.365], r:4500},
+  {n:'Binmaley–Dagupan low plain (NOAH high susceptibility)', c:[16.04,120.30], r:6000},
+  {n:'Western Tarlac foothills — Yellow warning belt', c:[15.69,120.41], r:9000},
+  {n:'Marikina River basin — check gauge', c:[14.64,121.09], r:2500}
+];
+const DEPTH = {ev:15, sedan:15, suv:30, x4:45}; DEPTH['4x4']=45;
+
+const map = L.map('map',{zoomControl:true}).setView([15.4,120.6],8);
+const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,className:'osm',attribution:'&copy; OpenStreetMap contributors'});
+const s2  = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',{maxZoom:15,attribution:'Sentinel-2 cloudless by EOX (Contains modified Copernicus Sentinel data 2020)'});
+const labels = L.tileLayer('https://tiles.maps.eox.at/wmts/1.0.0/overlay_bright_3857/default/g/{z}/{y}/{x}.png',{maxZoom:15,opacity:.9});
+let satOn = true; s2.addTo(map); labels.addTo(map);
+
+const hazLayer = L.layerGroup().addTo(map);
+HAZARDS.forEach(h => L.circle(h.c,{radius:h.r,color:'#ff3b30',weight:1,dashArray:'6 6',fillColor:'#ff3b30',fillOpacity:.14})
+  .bindPopup('<b>&#9888; '+h.n+'</b>').addTo(hazLayer));
+let hazOn = true;
+
+const routeLayer = L.layerGroup().addTo(map);
+function ico(k){ return L.divIcon({className:'',html:'<div class="wp '+(k||'')+'"></div>',iconSize:[0,0]}); }
+function drawCorridor(key){
+  routeLayer.clearLayers();
+  const c = CORRIDORS[key];
+  const line = L.polyline(c.pts.map(p=>p.c),{color:'#2ee06f',weight:4,opacity:.95,dashArray:'10 8'}).addTo(routeLayer);
+  c.pts.forEach(p => L.marker(p.c,{icon:ico(p.k)}).bindPopup('<b>'+p.n+'</b><br>'+p.t).addTo(routeLayer));
+  map.fitBounds(line.getBounds(),{padding:[60,60]});
+  const o=c.pts[0].c, d=c.pts[c.pts.length-1].c, w=c.pts.slice(1,-1).map(p=>p.c.join(',')).join('|');
+  document.getElementById('nav').href='https://www.google.com/maps/dir/?api=1&origin='+o.join(',')+'&destination='+d.join(',')+'&waypoints='+encodeURIComponent(w)+'&travelmode=driving';
+}
+drawCorridor('binmaley');
+document.getElementById('corr').addEventListener('change', e => drawCorridor(e.target.value));
+
+/* layer chips */
+document.getElementById('chipSat').onclick = function(){ satOn=!satOn; this.classList.toggle('on',satOn);
+  if(satOn){ map.removeLayer(osm); s2.addTo(map); labels.addTo(map);} else { map.removeLayer(s2); map.removeLayer(labels); osm.addTo(map);} };
+document.getElementById('chipHaz').onclick = function(){ hazOn=!hazOn; this.classList.toggle('on',hazOn); hazOn?hazLayer.addTo(map):map.removeLayer(hazLayer); };
+document.getElementById('chipGFM').onclick = () => window.open('https://global-flood.emergency.copernicus.eu/','_blank');
+document.getElementById('chipNOAH').onclick = () => window.open('https://noah.up.edu.ph/','_blank');
+document.getElementById('chipLGU').onclick = () => window.open('https://www.pangasinan.gov.ph/','_blank');
+
+/* ONE-CLICK decision engine */
+document.getElementById('run').addEventListener('click', () => {
+  const pag=+document.getElementById('pag').value, riv=+document.getElementById('riv').value,
+        gfm=+document.getElementById('gfm').value, night=+document.getElementById('day').value,
+        veh=document.getElementById('veh').value, depth=DEPTH[veh]||15;
+  const notes=[]; let score=0;
+  if(pag>=3){score+=100;notes.push(['bad','PAGASA RED at origin — serious flooding expected. Do not travel.']);}
+  else if(pag===2){score+=40;notes.push(['warn','PAGASA Orange at origin — flooding threatening. Travel only if essential.']);}
+  else if(pag===1){score+=15;notes.push(['warn','PAGASA Yellow — possible flooding in low areas.']);}
+  else notes.push(['ok','No rainfall warning at origin.']);
+  if(riv===2){score+=45;notes.push(['bad','River gauge above normal and RISING — plain roads may cut off behind you.']);}
+  else if(riv===1){score+=15;notes.push(['warn','River above normal but receding — expect residual water on low roads.']);}
+  else notes.push(['ok','River gauge below normal.']);
+  if(gfm===2){score+=60;notes.push(['bad','Copernicus GFM shows flood extent ON a road segment — corridor is not passable for this vehicle.']);}
+  else if(gfm===1){score+=15;notes.push(['warn','GFM shows flood patches near origin — verify the exit road visually before committing.']);}
+  else notes.push(['ok','No flood extent detected on route (GFM).']);
+  if(night){score+=20;notes.push(['warn','Night departure — depth cannot be judged visually. Wait for daylight.']);}
+  else notes.push(['ok','Daylight departure.']);
+  notes.push(['warn','Vehicle limit: never enter water above '+depth+' cm'+(veh==='ev'?' — EV high-voltage battery and charge port must stay dry.':'.')]);
+  if(veh==='ev') notes.push(['warn','EV: depart at 80%+, top-up at Mabalacat/Clark. Rain + AC raises consumption.']);
+  notes.push(['ok','Route bypasses the Calasiao/Marusay hotspot and rides TPLEX→SCTEX→NLEX.']);
+
+  const v=document.getElementById('verdict'); v.className='verdict show';
+  let title;
+  if(score>=60){v.classList.add('nogo');title='\u26D4 NO-GO — hold at origin safe zone';}
+  else if(score>=20){v.classList.add('caution');title='\u26A0 CAUTION — go only if essential';}
+  else{v.classList.add('go');title='\u2713 GO — proceed, monitor en route';}
+  document.getElementById('vTitle').textContent=title;
+  document.getElementById('vList').innerHTML=notes.map(n=>'<li class="'+n[0]+'">'+n[1]+'</li>').join('');
+  v.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+</script>
+</body>
+</html>
