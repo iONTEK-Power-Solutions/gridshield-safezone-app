@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activate — iONTEK Project GridShield™ Safe Zone PH</title>
+<meta name="theme-color" content="#0b0e11">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Safe Zone PH">
+<style>
+/* iONTEK Project GridShield™ Safe Zone — One-Click Activate Launcher
+ * v3.1.2 · Build SZ-20260902-PH-L · © 2026 M.R.P. Ballestar / iONTEK Power Solutions Corporation
+ * All Rights Reserved · RA 8293 · SEC Reg. CS202001609 */
+:root{--alert:#ff3b30;--safe:#2ee06f;--amber:#ffb020;--teal:#0e7c7b;--ink:#0b0e11;--panel:#12161b;
+  --line:#232a32;--txt:#d7e0e8;--mut:#8494a3;--mono:'Courier New',ui-monospace,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;background:radial-gradient(ellipse at top,#131a20,var(--ink) 60%);color:var(--txt);
+  font-family:var(--mono);display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.wrap{width:100%;max-width:420px;text-align:center}
+.brand{font-size:10px;letter-spacing:.24em;color:var(--teal);font-weight:bold;text-transform:uppercase}
+h1{font-size:26px;letter-spacing:.06em;color:#fff;text-transform:uppercase;margin:6px 0 4px}
+.sub{font-size:11px;color:var(--mut);letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+.icon{width:96px;height:96px;border-radius:22px;margin:0 auto 18px;box-shadow:0 0 0 1px var(--line),0 10px 40px rgba(46,224,111,.15)}
+.plat{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);
+  border:1px solid var(--line);background:var(--panel);padding:5px 10px;border-radius:2px;margin-bottom:16px}
+.plat b{color:#fff}
+.activate{display:block;width:100%;background:var(--safe);color:#04130a;border:none;border-radius:4px;
+  font-family:var(--mono);font-weight:bold;font-size:15px;letter-spacing:.14em;text-transform:uppercase;
+  padding:18px 12px;cursor:pointer;box-shadow:0 0 30px rgba(46,224,111,.25);animation:glow 2s ease-in-out infinite}
+@keyframes glow{50%{box-shadow:0 0 50px rgba(46,224,111,.45)}}
+.activate:active{transform:scale(.98)}
+.open{display:block;margin-top:10px;font-size:11px;letter-spacing:.1em;color:var(--teal);text-decoration:none;text-transform:uppercase}
+.sheet{display:none;margin-top:18px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);
+  padding:14px;text-align:left;font-size:12px;line-height:1.7}
+.sheet.show{display:block}
+.sheet b{color:#fff}
+.sheet .k{display:inline-block;background:#1c232b;border:1px solid var(--line);padding:1px 7px;border-radius:3px;color:#fff}
+.qr{display:none;margin-top:18px;background:#fff;padding:12px;border-radius:6px;width:196px;margin-left:auto;margin-right:auto}
+.qr.show{display:block}
+.qrcap{font-size:10px;color:var(--mut);letter-spacing:.1em;margin-top:8px;text-transform:uppercase}
+.foot{margin-top:26px;font-size:9.5px;color:var(--mut);line-height:1.6}
+.foot a{color:var(--teal)}
+.ok{display:none;margin-top:16px;color:var(--safe);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.ok.show{display:block}
+
+.ptr{position:fixed;left:0;right:0;bottom:8px;z-index:50;pointer-events:none;display:none;text-align:right;padding-right:26px}
+.ptr.show{display:block}
+.ptr .arrow{display:inline-block;font-size:42px;color:var(--amber);animation:bounce 1s ease-in-out infinite;text-shadow:0 0 14px rgba(255,176,32,.6)}
+.ptr .lbl{display:block;font-size:11px;color:var(--amber);letter-spacing:.12em;text-transform:uppercase;margin-top:-6px}
+.ptr.center{text-align:center;padding-right:0}
+@keyframes bounce{50%{transform:translateY(10px)}}
+.steps{counter-reset:s;list-style:none;margin-top:6px}
+.steps li{position:relative;padding:10px 10px 10px 44px;margin:6px 0;background:#161c23;border:1px solid var(--line);border-radius:4px;font-size:13px;line-height:1.55}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:10px;top:9px;width:24px;height:24px;border-radius:50%;background:var(--safe);color:#04130a;font-weight:bold;text-align:center;line-height:24px;font-size:13px}
+.big{font-size:22px;vertical-align:middle}
+.toggle{display:inline-block;margin-top:10px;font-size:11px;color:var(--teal);text-decoration:underline;cursor:pointer;letter-spacing:.06em}
+.alt{display:none;margin-top:8px;font-size:12px;color:var(--mut);line-height:1.6}
+.alt.show{display:block}
+</style>
+</head>
+<body>
+<div class="ptr" id="ptr"><span class="arrow">&#8595;</span><span class="lbl" id="ptrLbl">tap here</span></div>
+<div class="wrap">
+  <img class="icon" src="icon-192.png" alt="Safe Zone PH icon">
+  <div class="brand">iONTEK Project GridShield&trade;</div>
+  <h1>Safe Zone &middot; PH</h1>
+  <div class="sub">Luzon &middot; Visayas &middot; Mindanao</div>
+
+  <div class="plat">Device detected: <b id="plat">&hellip;</b></div>
+
+  <button class="activate" id="btnActivate">&#9889; Activate on this phone</button>
+  <a class="open" href="index.html">or open in browser without installing &rarr;</a>
+
+  <div class="ok" id="ok">&#10003; Installed &mdash; find Safe Zone PH on your home screen</div>
+
+  <div class="sheet" id="iosSheet">
+    <b>iPhone / iPad &mdash; 3 taps, tapos may icon ka na:</b>
+    <ol class="steps">
+      <li>Tap <span class="k big">&#8943;</span> <b>(three dots)</b> sa <b>kanang-ibaba</b> ng Safari. <span style="color:var(--mut)">Kung Share <span class="k">&#9633;&#8593;</span> ang nakikita mo sa gitna, tap 'yun.</span></li>
+      <li>Hanapin at tap <span class="k">Add to Home Screen</span> <span style="color:var(--mut)">(scroll pababa kung hindi agad kita)</span></li>
+      <li>Tap <span class="k">Add</span> sa kanang-itaas. Tapos! Hanapin ang <b>Safe Zone PH</b> icon sa home screen.</li>
+    </ol>
+    <span class="toggle" id="iosWhy">Bakit hindi one-tap sa iPhone? &#9662;</span>
+    <div class="alt" id="iosWhyTxt">Apple does not allow any web app to install itself in one tap &mdash; every iPhone web app (banks, government, news) uses these same 3 taps. The one-tap version of Safe Zone PH is coming to the App Store. Sa Android, one-tap na ngayon.</div>
+    <div style="margin-top:10px;color:var(--mut);font-size:11px">Must be opened in <b>Safari</b> &mdash; not the Facebook / Messenger / Viber in-app browser. Kung galing ka sa FB: tap &#8943; &rarr; <i>Open in Safari</i> muna.</div>
+  </div>
+
+  <div class="sheet" id="andSheet">
+    <b>Android &mdash; kung walang lumabas na Install prompt:</b>
+    <ol class="steps">
+      <li>Tap <span class="k big">&#8942;</span> (three dots) sa <b>kanang-itaas</b> ng Chrome</li>
+      <li>Tap <span class="k">Add to Home screen</span> o <span class="k">Install app</span></li>
+      <li>Tap <span class="k">Install</span>. Tapos! Hanapin ang <b>Safe Zone PH</b> sa home screen.</li>
+    </ol>
+    <div style="margin-top:10px;color:var(--mut);font-size:11px">Must be opened in <b>Chrome</b> &mdash; not the Facebook / Messenger in-app browser. Kung galing ka sa FB: tap &#8942; &rarr; <i>Open in Chrome</i> muna.</div>
+  </div>
+
+  <div class="qr" id="qr"></div>
+  <div class="qrcap" id="qrcap" style="display:none">Scan with your phone camera to activate</div>
+
+  <div class="foot">
+    Free public-safety app. Location is processed on your device only (RA 10173). Confirm evacuation centers with your DRRMO.<br>
+    Hazard science: <a href="https://noah.up.edu.ph/" target="_blank" rel="noopener">UP NOAH</a><br>
+    &copy; 2026 Milagrosa Russelle P. Ballestar &middot; iONTEK Power Solutions Corporation &mdash; GridShield&trade; Division &middot; RA 8293 &middot; v3.1.2 (SZ-20260902-PH-L)
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const ua = navigator.userAgent || '';
+const isIOS = /iPhone|iPad|iPod/i.test(ua) && !window.MSStream;
+const isAndroid = /Android/i.test(ua);
+const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const platEl = document.getElementById('plat');
+platEl.textContent = isIOS ? 'iOS (iPhone/iPad)' : isAndroid ? 'Android' : 'Desktop / other';
+/* Desktop: show QR immediately - no click needed */
+function renderQR(){
+  const box = document.getElementById('qr');
+  box.classList.add('show'); document.getElementById('qrcap').style.display = 'block';
+  if (box.hasChildNodes()) return;
+  if (typeof QRCode !== 'undefined') {
+    new QRCode(box, {text: location.href.split('#')[0], width: 172, height: 172, colorDark: '#0b0e11', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M});
+  } else {
+    const img = document.createElement('img');
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=172x172&data=' + encodeURIComponent(location.href.split('#')[0]);
+    img.width = 172; img.height = 172; img.alt = 'QR code'; box.appendChild(img);
+  }
+}
+if (!isIOS && !isAndroid && !standalone) {
+  renderQR();
+  document.getElementById('btnActivate').textContent = '\u2B07 On desktop \u2014 scan the QR with your phone';
+  const cp = document.createElement('button');
+  cp.className = 'activate'; cp.style.background = 'transparent'; cp.style.color = 'var(--teal)';
+  cp.style.border = '1.5px solid var(--teal)'; cp.style.boxShadow = 'none'; cp.style.animation = 'none'; cp.style.marginTop = '10px';
+  cp.textContent = '\u29C9 Copy link to send to a phone';
+  cp.onclick = () => { navigator.clipboard && navigator.clipboard.writeText(location.href.split('#')[0]); cp.textContent = '\u2713 Link copied \u2014 paste in Messenger/Viber/SMS'; };
+  document.querySelector('.open').after(cp);
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+
+let deferred = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; });
+window.addEventListener('appinstalled', () => {
+  document.getElementById('ok').classList.add('show');
+  document.getElementById('andSheet').classList.remove('show');
+});
+
+if (standalone) {
+  document.getElementById('ok').classList.add('show');
+  document.getElementById('btnActivate').textContent = '\u25B6 Open Safe Zone PH';
+  document.getElementById('btnActivate').onclick = () => location.href = 'index.html';
+} else {
+  document.getElementById('btnActivate').addEventListener('click', async () => {
+    if (isIOS) { document.getElementById('iosSheet').classList.add('show'); return; }
+    if (isAndroid) {
+      if (deferred) { deferred.prompt(); const r = await deferred.userChoice; deferred = null;
+        if (r.outcome !== 'accepted') document.getElementById('andSheet').classList.add('show'); }
+      else document.getElementById('andSheet').classList.add('show');
+      return;
+    }
+    /* desktop: show QR of this page so the user scans with a phone */
+    document.getElementById('qr').classList.add('show');
+    document.getElementById('qrcap').style.display = 'block';
+    if (!document.getElementById('qr').hasChildNodes()) {
+      new QRCode(document.getElementById('qr'), {text: location.href, width: 172, height: 172,
+        colorDark: '#0b0e11', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M});
+    }
+  });
+}
+
+/* v3.1.1: pointer + in-app browser detection */
+const inApp = /FBAN|FBAV|Instagram|Messenger|Viber|Line\//i.test(ua);
+if (inApp && !standalone) {
+  platEl.textContent += ' \u00B7 open in ' + (isIOS ? 'Safari' : 'Chrome');
+  const w = document.createElement('div');
+  w.className = 'sheet show'; w.style.borderLeftColor = 'var(--alert)';
+  w.innerHTML = '<b>Nasa Facebook/Messenger browser ka.</b> Hindi makakapag-install dito. Tap <span class="k">' + (isIOS ? '&#8943;' : '&#8942;') + '</span> &rarr; <b>Open in ' + (isIOS ? 'Safari' : 'Chrome') + '</b>, tapos balik dito.';
+  document.querySelector('.wrap').insertBefore(w, document.getElementById('btnActivate'));
+}
+function showPtr(where, label){ const p = document.getElementById('ptr'); p.className = 'ptr show' + (where === 'center' ? ' center' : ''); document.getElementById('ptrLbl').textContent = label; setTimeout(() => p.classList.remove('show'), 12000); }
+document.getElementById('btnActivate').addEventListener('click', () => {
+  if (standalone) return;
+  if (isIOS) showPtr('right', 'tap \u22EF then Add to Home Screen');
+});
+document.getElementById('iosWhy').addEventListener('click', () => document.getElementById('iosWhyTxt').classList.toggle('show'));
+</script>
+</body>
+</html>
