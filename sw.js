@@ -1,6 +1,6 @@
 /* iONTEK GridShield SafeRoute - Service Worker v1.0.0
  * (c) 2026 M.R.P. Ballestar / iONTEK Power Solutions Corporation. All Rights Reserved. RA 8293. */
-const CACHE = 'safezone-ph-v3-1';
+const CACHE = 'safezone-ph-v3-1-2';
 const SHELL = [
   './index.html',
   './install.html',
